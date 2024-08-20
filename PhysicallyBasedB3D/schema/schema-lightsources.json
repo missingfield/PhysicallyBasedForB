@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Light",
+  "description": "A light source.",
+  "type": "array",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "description": "Name of the light source.",
+        "type": "string",
+        "default": "Name"
+      },
+      "temperature": {
+        "description": "Color temperature in Kelvin.",
+        "type": "number",
+        "default": 6500
+      },
+      "temperatureRange": {
+        "description": "The typical range of color temperature for this specific light source.",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [6500, 7000],
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "intensity": {
+        "type": "number",
+        "default": 0
+      },
+      "intensityRange": {
+        "description": "The typical range of intensity for this specific light source.",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [0, 1],
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "unit": {
+        "type": "array",
+        "items": {
+          "enum": ["lm", "lx", "cd/m2"]
+        },
+        "minItems": 1,
+        "maxItems": 1
+      },
+      "type": {
+        "description": "The type of light, for DCC applications.",
+        "type": "array",
+        "items": {
+          "enum": [
+            "directional",
+            "surface",
+            "spot",
+            "point",
+            "cylinder",
+            "dome"
+          ]
+        },
+        "minItems": 1,
+        "maxItems": 1
+      },
+      "category": {
+        "type": "array",
+        "items": {
+          "enum": ["Artificial", "Natural"]
+        },
+        "minItems": 1,
+        "maxItems": 1
+      },
+      "description": {
+        "description": "This field should be used for disclaimers and other useful info for CG artists that may affect the way they use the values. It's totally fine to leave this empty.",
+        "type": "string",
+        "maxLength": 500
+      },
+      "sources": {
+        "description": "Provide at least one source for the values.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "tags": {
+        "description": "Tags",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      }
+    },
+    "required": [
+      "name",
+      "temperature",
+      "intensity",
+      "unit",
+      "category",
+      "description",
+      "sources"
+    ]
+  }
+}

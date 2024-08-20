@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Material",
+  "description": "PBR material using the Autodesk Standard Surface naming conventions: https://autodesk.github.io/standard-surface/",
+  "type": "array",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "description": "Name of the material.",
+        "type": "string",
+        "default": "Name"
+      },
+      "color": {
+        "description": "Albedo, or metal color, RGB triplet (vec3) in linear decimal format in rec709 primaries.",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [0.5, 0.5, 0.5],
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "metalness": {
+        "type": "number",
+        "default": 0
+      },
+      "specularColor": {
+        "description": "Specular tint for metals (edge tint), calculated from n and k values.",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [1, 1, 1],
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "roughness": {
+        "type": "number",
+        "default": 0.5
+      },
+      "ior": {
+        "type": "number",
+        "default": 1.5
+      },
+      "subsurfaceRadius": {
+        "description": "The approximate distance up to which light can scatter below the surface, also known as “mean free path” (MFP).",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [1, 1, 1],
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "transmission": {
+        "description": "",
+        "type": "number",
+        "default": 0
+      },
+      "transmissionDispersion": {
+        "description": "Abbe number, describing how much the index of refraction varies across wavelengths. For glass and diamonds, this is typically in the range of 10 to 70, with lower numbers giving more dispersion.",
+        "type": "number",
+        "default": 0
+      },
+      "complexIor": {
+        "description": "Complex IOR values, n (refractive index), and k (extinction coefficient), for each color channel, in the following order: nR, kR, nG, kG, nB, kB. Calculated from spectral IOR data files.",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [0, 0, 0, 0, 0, 0],
+        "minItems": 6,
+        "maxItems": 6
+      },
+      "density": {
+        "description": "Density measured in kg/m3.",
+        "type": "number",
+        "default": 1000
+      },
+      "densityRange": {
+        "description": "The typical range of density.",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [1000, 1000],
+        "minItems": 2,
+        "maxItems": 2
+      },
+      "viscosity": {
+        "description": "Dynamic viscosity measured in millipascal-seconds (mPa⋅s) at a temperature of 20°C. 1 mPa⋅s (millipascal-second) = 1 cP (centipoise). Used for fluid simulations.",
+        "type": "number",
+        "default": 1
+      },
+      "acousticAbsorption": {
+        "description": "Absorption coefficients at 125, 250, 500, 1000, 2000, and 4000 kHz.",
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "default": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+        "minItems": 6,
+        "maxItems": 6
+      },
+      "category": {
+        "type": "array",
+        "items": {
+          "enum": [
+            "Calibration",
+            "Crystal",
+            "Gas",
+            "Human",
+            "Liquid",
+            "Manmade",
+            "Metal",
+            "Organic",
+            "Plastic"
+          ]
+        },
+        "minItems": 1,
+        "maxItems": 1
+      },
+      "group": {
+        "description": "Can be used to group similar materials together. For example, Skin I, Skin II, and Skin III would be part of the same group: Skin.",
+        "type": "string",
+        "default": "Group"
+      },
+      "description": {
+        "description": "This field should be used for disclaimers and other useful info for CG artists that may affect the way they use the values. It's totally fine to leave this empty.",
+        "type": "string",
+        "maxLength": 500
+      },
+      "sources": {
+        "description": "Provide at least one source for the values.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "tags": {
+        "description": "Tags for when there are alternative names or spellings of the same material.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      "reference": {
+        "description": "Links to reference images.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uniqueItems": true
+      }
+    },
+    "required": [
+      "name",
+      "color",
+      "metalness",
+      "roughness",
+      "ior",
+      "density",
+      "category",
+      "description",
+      "sources",
+      "reference"
+    ]
+  }
+}

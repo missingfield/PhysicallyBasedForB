@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "title": "Camera",
+  "description": "Any type of camera that is being used, or simulated, in any way in CG productions (including games).",
+  "type": "array",
+  "items": {
+    "additionalProperties": false,
+    "properties": {
+      "name": {
+        "description": "Name of the camera.",
+        "type": "string",
+        "default": "Name"
+      },
+      "sensorSize": {
+        "description": "Array of sensor sizes. First item specifies the size of a fully open gate. If needed, additional sizes can be added for cameras that crop the sensor.",
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "additionalProperties": false,
+          "type": "object",
+          "properties": {
+            "format": {
+              "description": "Specifies the sensor format.",
+              "type": "string",
+              "default": "Open Gate"
+            },
+            "size": {
+              "description": "Sensor size in millimeters (WxH).",
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "default": [36, 24],
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "required": ["format", "size"]
+        }
+      },
+      "category": {
+        "type": "array",
+        "items": {
+          "enum": ["Still", "Movie", "Mobile"]
+        },
+        "minItems": 1,
+        "maxItems": 1
+      },
+      "description": {
+        "description": "This field should be used for disclaimers and other useful info for CG artists that may affect the way they use the values. It's totally fine to leave this empty.",
+        "type": "string",
+        "maxLength": 500
+      },
+      "sources": {
+        "description": "Provide at least one source for the values. Source link to official manufacturer website is preferred.",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        },
+        "minItems": 1,
+        "uniqueItems": true
+      },
+      "tags": {
+        "description": "Tags",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      }
+    },
+    "required": ["name", "sensorSize", "category", "description", "sources"]
+  }
+}
